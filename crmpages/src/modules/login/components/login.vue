@@ -3,7 +3,7 @@
   <!--</div>-->
   <div class="login">
     <p style="font-size: 35px;">登录</p>
-    <el-form label-width="50px" class="demo-ruleForm">
+    <el-form label-width="55px" class="demo-ruleForm">
 
       <el-form-item label="用户名">
         <el-input autocomplete="on" v-model="login_data.user_name"></el-input>
@@ -43,18 +43,30 @@
     },
     methods: {
       login() {
-        console.log(this.login_data)
         this.login_data.password = this.md5(this.login_data.password)
         var login_data = this.qs.stringify(this.login_data)
-        this.$ajax.post('/api/admin/login', login_data).then(
+        //这里/api在proxyTable中被pathRewrite:所定义的空字符串代替,就剩下/index
+        // 所以实际被替换为:http://127.0.0.1:8000/index/
+        //注意index/参数需要和后台urls中的路由参数一致,不然无法正常发送请求
+        this.$ajax.post('/api/admin/login', login_data, {
+          // withCredentials: true
+        }).then(
           respons => {
             alert(respons.data.result)
-            this.$router.push({name: 'HelloWorld'})//重定向到router路由文件中定义别名为HelloWorld的公用组件
+            console.log(respons)
+            //this.$router.push({name: 'HelloWorld'})//重定向到router路由文件中定义别名为HelloWorld的公用组件
+            if (respons.data.result === 'ok') {
+              window.location.href = '/system'
+            } else {
+              alert(respons.data.result)
+              this.$router.push({name: 'login'})
+            }
+            // this.$router.push( '/system/index.html#/')
           }).catch(error => {
           console.log(error)
         })
       },
-    }
+    },
   }
 </script>
 

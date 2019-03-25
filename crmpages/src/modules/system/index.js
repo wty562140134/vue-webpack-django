@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// import Vue from 'vue'
 import Vue from 'vue'
 import ElementUI from 'element-ui'// 导入element-ui
 import 'element-ui/lib/theme-chalk/index.css'//导入element-ui css
@@ -12,20 +13,21 @@ import md5 from 'md5'// 导入md5
 
 Axios.defaults.withCredentials = true//这句不写有可能后台拒绝post请求
 Vue.prototype.qs = Qs// 设置全局的表单插件
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 /*
 设置全局的Axios跨域session为true,这个默认为false,不设置为true每次请求都会是一个新的session
 */
 Axios.defaults.withCredentials = true
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
 Vue.prototype.$ajax = Axios// 设置全局的请求发送插件
 Vue.prototype.md5 = md5// 设置全局的md5
 Vue.config.productionTip = false
 Vue.use(ElementUI)// 设置全局使用element-u
 
-Vue.config.debug = true// 开启debug模式
 Vue.config.productionTip = false
-
+Vue.config.debug = true //开启debug模式
 
 /* eslint-disable no-new */
 new Vue({
