@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <h1>{{msg}}</h1>
     <router-view/>
   </div>
 </template>
@@ -14,7 +15,7 @@
     // components: {admin, login},
     data() {
       return {
-        msg: '我是公共组件啊！'
+        msg: '????????????/'
       }
     },
     methods: {

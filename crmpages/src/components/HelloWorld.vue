@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <img src="../assets/logo.png">
+    <!--<img src="../assets/2b.jpg">-->
     <h1>这里相当于是各个模块要复用的公共组件</h1>
     <h2>{{ msg }}</h2>
   </div>
@@ -11,7 +12,7 @@
     name: 'hello',
     data() {
       return {
-        msg: '我是公共组件啊！'
+        msg: '我是公共组件啊！!!!!!!!!!'
       }
     }
   }
