@@ -25,6 +25,11 @@
     methods: {
       quit() {
         this.$ajax.get('/api/admin/exit').then(respons => {
+          /*
+              不同模块之间的跳转需要使用window.location.href = '/login'
+              进行跳转不然会出现页面图片无法正常加载的情况,
+              编译后需要去修改相应模块的js,修改为访问模块的html如:window.location.href="/login.html"
+               */
           window.location.href = '/login'
         })
       }

@@ -184,7 +184,7 @@ STATIC_URL = '/static/'
 以下是django集成vue编译模版配置,使用前后分离可以不用
 '''
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "frontend/dist/static"),
+#     os.path.join(BASE_DIR, "frontend/dist/assets"),
 # ]
 # WEBPACK_LOADER = {
 #     'DEFAULT': {

@@ -56,6 +56,11 @@
             console.log(respons)
             //this.$router.push({name: 'HelloWorld'})//重定向到router路由文件中定义别名为HelloWorld的公用组件
             if (respons.data.result === 'ok') {
+              /*
+              不同模块之间的跳转需要使用window.location.href = '/system'
+              进行跳转不然会出现页面图片无法正常加载的情况,
+              编译后需要去修改相应模块的js,修改为访问模块的html如:window.location.href="/system.html"
+               */
               window.location.href = '/system'
             } else {
               alert(respons.data.result)

@@ -96,7 +96,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
-    // copy custom static assets
+    // copy custom assets assets
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

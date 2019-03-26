@@ -29,6 +29,6 @@ def sys_home(request):
 
 def exit(request):
     sess = request.session
-    if sess['user_name']:
+    if sess.get('user_name'):
         del sess['user_name']
     return HttpResponse(simplejson.dumps({'result': 'ok'}))
