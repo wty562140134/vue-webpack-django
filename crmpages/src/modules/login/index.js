@@ -35,3 +35,22 @@ new Vue({
   components: {App},
   template: '<App/>',
 })
+
+/**
+ * 模块跳转拦截
+ */
+router.beforeEach((to, from, next) => {
+  if (to.path === '/route') {
+    //是否登录验证
+    Axios.get('/api/admin/admin').then(respons => {
+      //如果验证通过
+      if (respons.data.result === 'ok') {
+        alert(respons.data.result)
+      } else {
+        //验证不通过则返回登录模块
+        next({name: 'login'})
+      }
+    })
+  }
+  next()
+});

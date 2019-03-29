@@ -31,6 +31,31 @@
       }
     },
 
+    /**
+     * 是否是登录状态拦截
+     */
+    beforeRouteEnter(to, from, next) {
+      if (to.path === '/') {
+        //登录验证
+        next(vm => {
+          // 通过 `vm` 访问组件实例
+          vm.$ajax.get('/api/admin/admin').then(respons => {
+            //如果验证通过
+            if (respons.data.result === 'ok') {
+              // window.location.href = '/login'
+              //通过公共路由路由到指定模块
+              // router.push({name: 'route', params: {to_router: 'system'}})
+            } else {
+              //验证不通过则返回登录模块
+              alert(respons.data.result)
+              next({name: 'route', params: {to_router: 'login'}})
+            }
+          })
+        })
+      }
+      next()
+    },
+
   }
 </script>
 

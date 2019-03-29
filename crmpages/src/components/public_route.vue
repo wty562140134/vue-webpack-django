@@ -1,5 +1,6 @@
 <template>
-  <div class="public_route"></div>
+  <div class="public_route">
+  </div>
 </template>
 
 <script>
@@ -30,7 +31,7 @@
       } else {
         window.location.href = '/' + this.to_route + '.html'
       }
-    }
+    },
 
   }
 </script>

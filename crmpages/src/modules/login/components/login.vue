@@ -2,7 +2,7 @@
   <!--<div class="login">-->
   <!--</div>-->
   <div class="login">
-
+    
     <p style="font-size: 35px;">登录</p>
     <el-form label-width="55px" class="demo-ruleForm">
 
@@ -68,29 +68,6 @@
           console.log(error)
         })
       },
-    },
-
-    /**
-     * 登录路由拦截
-     */
-    beforeRouteEnter(to, from, next) {
-      //先拦截到公共路由组件的路由
-      if (to.path === '/route') {
-        //登录验证
-        this.$ajax.get('/api/admin/admin').then(respons => {
-          //如果验证通过
-          if (respons.data.result === 'ok') {
-            // window.location.href = '/login'
-            //通过公共路由路由到指定模块
-            this.$router.push({name: 'route', params: {to_router: 'system'}})
-            alert(respons.data.result)
-          } else {
-            //验证不通过则返回登录模块
-            this.$router.push('/')
-          }
-        })
-      }
-      next()
     },
 
     /**

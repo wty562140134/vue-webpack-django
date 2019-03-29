@@ -21,9 +21,11 @@ def login(request):
 
 def sys_home(request):
     sess = request.session
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', sess.get('user_name'))
     if sess.get('user_name'):
         return HttpResponse(simplejson.dumps({'result': 'ok'}))
     else:
+        print("请登录!!!!!!!!!")
         return HttpResponse(simplejson.dumps({'result': '请登录'}))
 
 
