@@ -2,6 +2,7 @@
   <!--<div class="login">-->
   <!--</div>-->
   <div class="login">
+
     <p style="font-size: 35px;">登录</p>
     <el-form label-width="55px" class="demo-ruleForm">
 
@@ -41,6 +42,7 @@
         },
       }
     },
+
     methods: {
       login() {
         this.login_data.password = this.md5(this.login_data.password)
@@ -52,14 +54,13 @@
           // withCredentials: true
         }).then(
           respons => {
-            alert(respons.data.result)
-            console.log(respons)
             //this.$router.push({name: 'HelloWorld'})//重定向到router路由文件中定义别名为HelloWorld的公用组件
             if (respons.data.result === 'ok') {
               /*
-              不同模块之间的跳转需要使用window.location.href = '/system'
-              进行跳转不然会出现页面图片无法正常加载的情况,
-              编译后需要去修改相应模块的js,修改为访问模块的html如:window.location.href="/system.html"
+              图片加载是在模块组件中通过js加载,模块之间路由跳转使用this.$router.push('/login').
+              使用这种方式进行路由跳转若图片不是通过js在组件中加载会出现图片无法正常加载的问题,
+              使用window.location.href = '/login'就可以正常访问,
+              编译后需要去修改相应模块的js,例如:window.location.href="/system.html"
                */
               window.location.href = '/system'
             } else {
@@ -72,6 +73,20 @@
         })
       },
     },
+
+    /**
+     * 把静态资源加载放在相应的组件中并通过js进行加载可以很好的解决模块跳转导致图片无法加载的问题
+     */
+    beforeCreate() {
+      /*
+      虽然vue不提倡操纵dom元素,
+      但是由于body是在页面还未渲染之前就有的,
+      此时vue内的el对象还没生产,所以无法通过el来操作dom,
+      所以只能通过这种方式来给body设置图片
+       */
+      document.querySelector('body').setAttribute('style', 'background-image:url(/static/2b.jpg);background-repeat:no-repeat;width;100%;height: 100%;')
+    },
+
   }
 </script>
 

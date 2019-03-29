@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-import header from '../components/header'
-import leftBox from '../components/left'
 import mainBox from '../components/main'
 
 
@@ -17,10 +14,10 @@ export default new Router({
     },
     {
       path: '/system', components: {
-        'default': header,
-        'left': leftBox,
+        'default': () => import('../components/header'),
+        'left': () => import('../components/left'),
         'main': mainBox
       }
-    }
+    },
   ]
 })

@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'// 导入element-ui
 import 'element-ui/lib/theme-chalk/index.css'//导入element-ui css
+import "bootstrap"// 导入bootstrap
+import "bootstrap/dist/css/bootstrap.css"//导入bootstrap css
 import App from './App'
 import router from './router'
 import Axios from 'axios'// 导入前端请求发送插件

@@ -104,6 +104,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
+/////////////////////////////////////////////////////////
+    /*
+     * 配置插件jquery
+     */
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "windows.jQuery": "jquery"
+    }),
+//////////////////////////////////////////////////////////
     // https://github.com/ampedandwired/html-webpack-plugin
     // new HtmlWebpackPlugin({
     //   filename: 'login/index.html',
