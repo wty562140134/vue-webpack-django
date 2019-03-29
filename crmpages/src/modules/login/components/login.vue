@@ -56,13 +56,9 @@
           respons => {
             //this.$router.push({name: 'HelloWorld'})//重定向到router路由文件中定义别名为HelloWorld的公用组件
             if (respons.data.result === 'ok') {
-              /*
-              图片加载是在模块组件中通过js加载,模块之间路由跳转使用this.$router.push('/login').
-              使用这种方式进行路由跳转若图片不是通过js在组件中加载会出现图片无法正常加载的问题,
-              使用window.location.href = '/login'就可以正常访问,
-              编译后需要去修改相应模块的js,例如:window.location.href="/system.html"
-               */
-              window.location.href = '/system'
+              // window.location.href = '/system'
+              //通过公共路由组件路由到system模块
+              this.$router.push({name: 'route', params: {to_router: 'system'}})
             } else {
               alert(respons.data.result)
               this.$router.push({name: 'login'})
@@ -72,6 +68,29 @@
           console.log(error)
         })
       },
+    },
+
+    /**
+     * 登录路由拦截
+     */
+    beforeRouteEnter(to, from, next) {
+      //先拦截到公共路由组件的路由
+      if (to.path === '/route') {
+        //登录验证
+        this.$ajax.get('/api/admin/admin').then(respons => {
+          //如果验证通过
+          if (respons.data.result === 'ok') {
+            // window.location.href = '/login'
+            //通过公共路由路由到指定模块
+            this.$router.push({name: 'route', params: {to_router: 'system'}})
+            alert(respons.data.result)
+          } else {
+            //验证不通过则返回登录模块
+            this.$router.push('/')
+          }
+        })
+      }
+      next()
     },
 
     /**

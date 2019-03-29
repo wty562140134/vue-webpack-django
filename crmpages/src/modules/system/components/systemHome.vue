@@ -25,31 +25,10 @@
     methods: {
       quit() {
         this.$ajax.get('/api/admin/exit').then(respons => {
-          /*
-              不同模块之间的跳转需要使用window.location.href = '/login'
-              进行跳转不然会出现页面图片无法正常加载的情况,
-              编译后需要去修改相应模块的js,修改为访问模块的html如:window.location.href="/login.html"
-               */
-          window.location.href = '/login'
+          // window.location.href = '/login'
+          this.$router.push({name: 'route', params: {to_router: 'login'}})
         })
       }
-    },
-
-    //这是一个简单的登录验证测试,正式的登录验证需要放到拦截器中
-    beforeCreate() {
-      this.$ajax.get('/api/admin/admin').then(respons => {
-        if (respons.data.result != 'ok') {
-          /*
-          模块之间使用this.$router.push('/login')方式进行跳转会出现图片无法正常加载的问题,
-          使用window.location.href = '/login'就可以正常访问,
-          编译后需要去修改相应模块的js,例如:window.location.href="/login.html"
-           */
-          window.location.href = '/login'
-          alert(respons.data.result)
-        } else {
-          this.$router.push('/')
-        }
-      })
     },
 
   }

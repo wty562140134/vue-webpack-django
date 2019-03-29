@@ -26,8 +26,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)// 设置全局使用element-u
 
 Vue.config.debug = true// 开启debug模式
-Vue.config.productionTip = false
-
+Vue.prototype.debug = true//声明这个用于控制是否是开发环境
 
 /* eslint-disable no-new */
 new Vue({

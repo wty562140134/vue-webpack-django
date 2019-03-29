@@ -25,5 +25,10 @@ export default new Router({
       name: 'admin',
       component: () => import('../components/admin'),
     },
+    {
+      path: '/route',
+      name: 'route',
+      component: () => import('../../../components/public_route')
+    }
   ]
 })

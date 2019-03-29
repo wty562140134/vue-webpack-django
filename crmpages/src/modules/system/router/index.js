@@ -19,5 +19,15 @@ export default new Router({
         'main': mainBox
       }
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import ('../../../components/public_route')
+    },
+    {
+      path: '/route',
+      name: 'route',
+      component: () => import ('../../../components/public_route')
+    },
   ]
 })
