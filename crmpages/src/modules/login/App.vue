@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  import login from "./components/login"
+  // import login from "./components/login"
 
   export default {
     name: 'app',
-    components: {login},
+    // components: {login},
     data() {
       return {
         msg: '初始页面msg',
