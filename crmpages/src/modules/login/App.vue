@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <!--<button @click="testRefs" ref="button1">点击一下</button>-->
-    <!--<input ref="input1" text="123"></input>-->
+    <button @click="testRefs" ref="button1">点击一下</button>
+    <input ref="input1" text="123"></input>
     <router-view/>
   </div>
 </template>
