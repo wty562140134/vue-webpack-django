@@ -7,6 +7,7 @@
 </template>
 
 <script>
+  // 如果需要使用<login></login>标签来进行渲染则需要通过引入login组件,并在components中定义,若是通过<router-view/>标签来通过路由匹配渲染则不需要
   // import login from "./components/login"
 
   export default {
