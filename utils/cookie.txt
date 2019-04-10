@@ -1,0 +1,8 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+www.gsafetycloud.com	FALSE	/	FALSE	1557563880	acw_tc	76b20f7215548854794244078e5286194b6b51117c41080e273e900517dc65
+www.gsafetycloud.com	FALSE	/operation-management	FALSE		JSESSIONID	d8185fc5-be17-4b03-a8c2-db3925bd76a3
+www.gsafetycloud.com	FALSE	/operation-management/login	FALSE			HttpOnly
+www.gsafetycloud.com	FALSE	/operation-management/login	FALSE			Secure
