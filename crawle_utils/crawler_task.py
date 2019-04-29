@@ -128,5 +128,3 @@ def run_task(*job, every=None, when_time=None, at_day_start_time='', to=None):
 
 
 run_task(get_org_task, when_time=configs['task']['when_time'], at_day_start_time=configs['task']['at_day_start_time'])
-
-print('testtest')
