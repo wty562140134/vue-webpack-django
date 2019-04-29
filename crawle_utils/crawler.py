@@ -12,7 +12,7 @@ current_path = os.path.abspath(os.path.dirname(__file__))
 # 获取本模块下配置文件中的数据对象
 configs = yaml_util.YamlLoadUtil(current_path + '/crawle_config.yaml').get_config_data()
 
-print(1)
+
 class Crawler:
     """
     爬取数据的类
