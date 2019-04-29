@@ -50,6 +50,10 @@
               alert(respons.data.result)
               next({name: 'route', params: {to_router: 'login'}})
             }
+          }).catch(error => {
+            // 出错定向到出错页面
+            alert(error)
+            next({name: 'route', params: {to_router: 'login'}})
           })
         })
       }

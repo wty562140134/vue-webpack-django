@@ -36,21 +36,27 @@ new Vue({
   template: '<App/>',
 })
 
+import router_interceptor from "../../assets/uitl/router_utils"
+
+router_interceptor(router, Axios, '/route', '/login', {method_type: 'post', api_url: '/api/admin/admin', params: {}})
+
 /**
  * 模块跳转拦截
  */
-router.beforeEach((to, from, next) => {
-  if (to.path === '/route') {
-    //是否登录验证
-    Axios.get('/api/admin/admin').then(respons => {
-      //如果验证通过
-      if (respons.data.result === 'ok') {
-        alert(respons.data.result)
-      } else {
-        //验证不通过则返回登录模块
-        next({name: 'login'})
-      }
-    })
-  }
-  next()
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/route') {
+//     //是否登录验证
+//     Axios.get('/api/admin/admin').then(respons => {
+//       //如果验证通过
+//       if (respons.data.result === 'ok') {
+//         alert(respons.data.result)
+//       } else {
+//         //验证不通过则返回登录模块
+//         next({name: 'login'})
+//       }
+//     }).catch(error => {
+//       next()
+//     })
+//   }
+//   next()
+// })

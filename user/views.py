@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import simplejson
 
 
@@ -16,7 +16,8 @@ def login(request):
     sess['user_name'] = request.POST.get('user_name')
     sess.set_expiry(30)
     print('session--------------->', sess['user_name'])
-    return HttpResponse(simplejson.dumps({'result': 'ok'}))
+    # return HttpResponse(simplejson.dumps({'result': 'ok'}))
+    return JsonResponse({'result': '123'})
 
 
 def sys_home(request):

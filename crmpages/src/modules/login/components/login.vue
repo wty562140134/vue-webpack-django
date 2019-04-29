@@ -2,7 +2,7 @@
   <!--<div class="login">-->
   <!--</div>-->
   <div class="login">
-    
+
     <p style="font-size: 35px;">登录</p>
     <el-form label-width="55px" class="demo-ruleForm">
 
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+  import {send} from '../../../assets/uitl/router_utils'
+
   export default {
     name: "login",
     data() {
@@ -46,10 +48,17 @@
     methods: {
       login() {
         this.login_data.password = this.md5(this.login_data.password)
+        console.log(this.login_data.password)
         var login_data = this.qs.stringify(this.login_data)
         //这里/api在proxyTable中被pathRewrite:所定义的空字符串代替,就剩下/index
         // 所以实际被替换为:http://127.0.0.1:8000/index/
         //注意index/参数需要和后台urls中的路由参数一致,不然无法正常发送请求
+        // var res = send(this.$ajax, this.$router, {
+        //   method_type: 'post',
+        //   api_url: '/api/admin/login',
+        //   params: {login_data}
+        // }, {name: 'route', params: {to_router: 'system'}})
+        // console.log(res)
         this.$ajax.post('/api/admin/login', login_data, {
           // withCredentials: true
         }).then(
