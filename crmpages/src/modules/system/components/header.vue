@@ -1,6 +1,5 @@
 <template>
-  <!--<div class="header">-->
-  <!--<h1>header区域</h1>-->
+
   <div class="header">
 
     <el-menu
@@ -27,8 +26,9 @@
       <el-menu-item index="3" disabled>消息中心</el-menu-item>
       <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
     </el-menu>
+
   </div>
-  <!--</div>-->
+
 </template>
 
 <script>
@@ -53,6 +53,7 @@
   /*.header {*/
   /*!*background-color: orange;*!*/
   /*height: 100%;*/
+  /*width: 100%;*/
   /*}*/
 
 </style>

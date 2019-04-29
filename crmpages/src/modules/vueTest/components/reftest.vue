@@ -1,11 +1,14 @@
 <template>
-  <button @click="testRefs" ref="button1">点击一下</button>
-  <input ref="input1" text="123"></input>
+  <div>
+    <button @click="testRefs" ref="button1">点击一下</button>
+    <input ref="input1" text="123"></input>
+  </div>
 </template>
 
 <script>
   // 如果需要在App.vue中使用<ref_test/>ref_test,并在components中定义.
   // <router-view/>标签是通过路由匹配渲染则不需要导入组件
+
   export default {
     name: "ref_test",
 

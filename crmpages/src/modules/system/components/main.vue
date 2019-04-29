@@ -1,6 +1,6 @@
 <template>
+
   <div class="main">
-    <!--<h1>main区域</h1>-->
 
     <el-table
       :data="tableData"
@@ -42,6 +42,7 @@
     </el-table>
 
   </div>
+
 </template>
 
 <script>
@@ -82,8 +83,8 @@
 <style scoped>
 
   /*.main {*/
-    /*!*background-color: lightpink;*!*/
-    /*flex: 8;*/
+  /*!*background-color: lightpink;*!*/
+  /*flex: 8;*/
   /*}*/
 
 </style>

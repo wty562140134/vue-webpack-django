@@ -1,11 +1,13 @@
 <template>
-
+  <div>
+    <h1>这是模版组件</h1>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "template"
-    }
+  export default {
+    name: "temp"
+  }
 </script>
 
 <style scoped>
