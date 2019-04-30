@@ -72,7 +72,6 @@ def update(db, unit, map_data):
         if unit['fs_unit_name'] != map_data['orgName']:
             update_sql += 'fs_unit_name=%(orgName)s'
             update_data['orgName'] = map_data['orgName']
-            # update_data_list.append(update_data)
 
         map_data['lat'] = float(map_data['lat'])
         if unit['fd_unit_lat'] != map_data['lat']:
@@ -81,7 +80,6 @@ def update(db, unit, map_data):
             else:
                 update_sql += 'fd_unit_lat=%(lat)s'
             update_data['lat'] = map_data['lat']
-            # update_data_list.append(update_data)
 
         map_data['log'] = float(map_data['log'])
         if unit['fd_unit_lng'] != map_data['log']:
@@ -90,7 +88,6 @@ def update(db, unit, map_data):
             else:
                 update_sql += 'fd_unit_lng=%(log)s'
             update_data['log'] = map_data['log']
-            # update_data_list.append(update_data)
 
         map_data['state'] = int(map_data['state'])
         if unit['fi_unit_status'] != map_data['state']:
