@@ -18,6 +18,7 @@ data_base:
 task:
   when_time: 'day'
   at_day_start_time: '00:00:00'
+  sleep_time: 10
 ########################################################################
 
 # 运营中心,消防管家系统的根域名
@@ -134,6 +135,12 @@ api_url:
   #  getChildOrg1: 'api/v1/fire-society/group/index/{}?orgCode={}' # 地图数据,包各单位的orgCode
   get_org_info: 'api/v1/eRecord/record/enterprises/1/{}'# 获取消防管家单位信息和图片信息
   fh_org_floor_img: 'image/floorImage/{}' # 消防管家获取单位建筑和楼层图片
+  getDeviceListByCondition: 'api/v1/monitorCenter/monitor/{}' # 消防管家探头信息
+  # 消防管家探头信息参数
+  #{'unitId': '530102YZDW201811290002',
+  #'floorId': '530102YZDW201811290002_001_U006',
+  # 'buildId': '530102YZDW201811290002_001',
+  #}
 
 
 # 获取消防管家地图 实时报警 监测故障 当前隐患信息接口
@@ -168,6 +175,7 @@ post_interface_url:
   #  - 'req_user_info_data'# 消防管家运行监测.监测报表{'unitId': 530102YZDW201811230002}
   ##################################################################
   - 'queryLyMonitorInfo' # 消防管家企业,实时报警,实时故障
+  - 'getDeviceListByCondition' # 告警探头信息#{'unitId': '530102YZDW201811290002', 'floorId': '530102YZDW201811290002_001_U006', 'buildId': '530102YZDW201811290002_001', 'deviceTypeIds': '', 'runState': ''}
 
 # 获取消防管家地图数据和消防管家实时报警,检测故障,当前隐患数接口
 get_interface_url:
