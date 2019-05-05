@@ -48,7 +48,7 @@ def update(db, data_base_data, web_data, update_sql='update t_units set ', where
     update_sql, update_data_list, update_data = set_update_data(data_base_data, web_data, update_sql)
     if update_data_list.__len__() > 0:
         update_sql = update_sql + where
-        db.commit(update_sql, update_data_list)
+    db.commit(update_sql, update_data_list)
 
 
 def set_task(job, every=None, when_time=None, at_day_start_time='', to=None):
