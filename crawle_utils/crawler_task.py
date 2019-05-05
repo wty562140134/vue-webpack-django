@@ -103,11 +103,11 @@ def get_org_task():
 
 def is_not_new_data(db, web_data, select_sql='select * from t_units where fs_unit_sn=%(orgCode)s'):
     for i in web_data:
-        unit = db.query(select_sql, {'orgCode': i['orgCode']})
-        if unit is None:
+        data_base_data = db.query(select_sql, {'orgCode': i['orgCode']})
+        if data_base_data is None:
             insert(db, i)
         else:
-            update(db, unit, i)
+            update(db, data_base_data, i)
 
 
 def set_update_data(data_base_data, web_data, update_sql):
