@@ -19,9 +19,12 @@ task:
   get_org_task:
     when_time: 'day'
     at_day_start_time: '00:00:00'
-  monitor_task:
+  monitor_task_morning:
     when_time: 'day'
     at_day_start_time: '10:00:00'
+  monitor_task_afternoon:
+    when_time: 'day'
+    at_day_start_time: '15:00:00'
 ########################################################################
 
 # 运营中心,消防管家系统的根域名
