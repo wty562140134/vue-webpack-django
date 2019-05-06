@@ -1,8 +1,8 @@
-from whbigdata.crawler.crawle_utils.db_util import DBConnect, select, insert, update
-from whbigdata.crawler.crawle_utils.crawler import get_fh_data, configs, format_get_params
-from whbigdata.crawler.crawle_utils.crawler_task import set_task, run_task
-from whbigdata.crawler.crawle_utils.date_util import *
-from whbigdata.crawler.crawle_utils.zb import pmtobd
+from .db_util import DBConnect, select, insert, update
+from .crawler import get_fh_data, configs, format_get_params
+from .crawler_task import set_task, run_task
+from .date_util import *
+from .zb import pmtobd
 
 
 def get_org_task():
