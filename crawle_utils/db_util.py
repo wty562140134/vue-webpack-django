@@ -13,6 +13,12 @@ class DBConnect:
         self._connect = pymysql.connect(**self._config)
         self._cursor = self._connect.cursor(cursor=pymysql.cursors.DictCursor)
 
+    @classmethod
+    def instance(cls, *args, **kwargs):
+        if not hasattr(DBConnect, "_instance"):
+            DBConnect._instance = DBConnect(*args, **kwargs)
+        return DBConnect._instance
+
     def query(self, sql, args=None):
         try:
             if args is None:
@@ -56,11 +62,11 @@ class DBConnect:
         self._connect.close()
 
     def __enter__(self):
-        print('connect start')
+        print('-------------------connect start-------------------')
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        print('close execute')
+        print('-------------------close execute-------------------')
         self.close()
 
 
@@ -78,6 +84,24 @@ def format_sql_params(sql_params, place_holder='&'):
         index += 1
     return params
 
+
+def select(db, select_sql='', where_data=None):
+    if where_data is not None:
+        return db.query(select_sql, where_data)
+    return db.query(select_sql)
+
+
+def insert(db, insert_data, insert_sql='', insert_data_handle_fun=None):
+    if insert_data_handle_fun is not None:
+        insert_data = insert_data_handle_fun()
+    db.commit(insert_sql, insert_data)
+
+
+def update(db, data_base_data, web_data, update_sql='', where='', update_data_handle_fun=None):
+    update_sql, update_data_list, update_data = update_data_handle_fun(data_base_data, web_data, update_sql)
+    if update_data_list.__len__() > 0:
+        update_sql = update_sql + where
+    db.commit(update_sql, update_data_list)
 
 # str1 = format_sql_params({'name': 'asd', 'age': 14, 'address': 'asd'}, 'and')
 # print(str1)

@@ -1,8 +1,8 @@
 import schedule
 import threading
-from .db_util import DBConnect
-from .crawler import get_fh_data, configs, format_get_params
-from .zb import pmtobd
+from whbigdata.crawler.crawle_utils.db_util import DBConnect, select, insert, update
+from whbigdata.crawler.crawle_utils.crawler import get_fh_data, configs, format_get_params
+from whbigdata.crawler.crawle_utils.zb import pmtobd
 
 
 # from crawler.crawle_utils.db_util import DBConnect
@@ -36,19 +36,6 @@ class Task:
             schedule.run_pending()
             for t in self._threads:
                 t.join()
-
-
-def insert(db, insert_data, insert_sql='insert into t_units(fs_unit_sn, fs_unit_name, '
-                                       'fd_unit_lat, fd_unit_lng, fi_unit_status, fs_unit_addr, fi_unit_type) '
-                                       'value (%(orgCode)s, %(orgName)s, %(lat)s, %(log)s, %(state)s, " ", 0)'):
-    db.commit(insert_sql, insert_data)
-
-
-def update(db, data_base_data, web_data, update_sql='update t_units set ', where=' where fi_unit_id=%(id)s'):
-    update_sql, update_data_list, update_data = set_update_data(data_base_data, web_data, update_sql)
-    if update_data_list.__len__() > 0:
-        update_sql = update_sql + where
-    db.commit(update_sql, update_data_list)
 
 
 def set_task(job, every=None, when_time=None, at_day_start_time='', to=None):
@@ -101,13 +88,57 @@ def get_org_task():
         is_not_new_data(db, map_data)
 
 
-def is_not_new_data(db, web_data, select_sql='select * from t_units where fs_unit_sn=%(orgCode)s'):
+def monitor_task():
+    connect = DBConnect(configs['data_base'])
+    with connect as db:
+        unit_ids = select(db, 'select fs_unit_sn from t_units')
+    if unit_ids is None:
+        return
+    for i in unit_ids:
+        if i['fs_unit_sn'] == 'WHXFDD_JT_201910110':
+            continue
+        monitor_report_params = {'unitId': i['fs_unit_sn'], 'deviceTypePid': '02000000', 'buildId': '',
+                                 'deviceTypeId': '',
+                                 'runState': '', 'pageNo': '1', 'pageSize': '30'}
+        monitor_report = get_fh_data(configs['post_interface_url'], monitor_report_params,
+                                     configs['api_url']['getDevicePageByCondition'],
+                                     appoint_interface='getDevicePageByCondition')
+
+        alarm_review_params = {'proprietorId': i['fs_unit_sn'], 'alarmTimeStart': '', 'alarmTimeEnd': '', 'pageNo': '1',
+                               'build': '', 'alarmNo': '', 'pageSize': '30'}
+        alarm_review = get_fh_data(configs['post_interface_url'], alarm_review_params,
+                                   configs['api_url']['examineQuery'],
+                                   appoint_interface='examineQuery')
+
+        dangers_rectification_params = {'pageNo': 1, 'pageSize': 4, 'proprietorId': i['fs_unit_sn'],
+                                        'accidentTimeStart': '', 'accidentTimeEnd': '', 'processState': '',
+                                        'isOverdued': '', 'datepicker': '', 'accidentNo': ''}
+        dangers_rectification = get_fh_data(configs['post_interface_url'], dangers_rectification_params,
+                                            configs['api_url']['accidents'],
+                                            appoint_interface='accidents')
+
+
+def is_not_new_data(db, web_data):
+    select_sql = 'select * from t_units where fs_unit_sn=%(orgCode)s'
+    insert_sql = '''
+                    insert into 
+                        t_units(
+                        fs_unit_sn, fs_unit_name, fd_unit_lat, 
+                        fd_unit_lng, fi_unit_status, fs_unit_addr, fi_unit_type
+                        ) 
+                    value 
+                        (%(orgCode)s, %(orgName)s, %(lat)s, 
+                        %(log)s, %(state)s, " ", 0)
+                '''
+    update_sql = 'update t_units set '
+    update_where = ' where fi_unit_id=%(id)s'
     for i in web_data:
-        data_base_data = db.query(select_sql, {'orgCode': i['orgCode']})
+        data_base_data = select(db, select_sql, {'orgCode': i['orgCode']})
         if data_base_data is None:
-            insert(db, i)
+            insert(db, i, insert_sql=insert_sql)
         else:
-            update(db, data_base_data, i)
+            update(db, data_base_data, i, update_sql=update_sql, where=update_where,
+                   update_data_handle_fun=set_update_data)
 
 
 def set_update_data(data_base_data, web_data, update_sql):
@@ -169,5 +200,5 @@ def test2():
 # set_task(test1, when_time='seconds', every=35)
 # set_task(test2, when_time='seconds', every=50)
 # set_task(get_org_task, when_time=configs['task']['when_time'], at_day_start_time=configs['task']['at_day_start_time'])
-set_task(get_org_task, when_time='seconds', every=15)
-run_task()
+# set_task(get_org_task, when_time='seconds', every=15)
+# run_task()
