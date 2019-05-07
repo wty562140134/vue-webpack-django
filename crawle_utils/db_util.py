@@ -97,11 +97,14 @@ def insert(db, insert_data, insert_sql='', insert_data_handle_fun=None):
     db.commit(insert_sql, insert_data)
 
 
-def update(db, data_base_data, web_data, update_sql='', where='', update_data_handle_fun=None):
-    update_sql, update_data_list, update_data = update_data_handle_fun(data_base_data, web_data, update_sql)
-    if update_data_list.__len__() > 0:
-        update_sql = update_sql + where
-    db.commit(update_sql, update_data_list)
+def update(db, update_date, data_base_data=None, web_data=None, update_sql='', where='', update_data_handle_fun=None):
+    if update_data_handle_fun is not None:
+        update_sql, update_data_list = update_data_handle_fun(data_base_data, web_data, update_sql)
+        if update_data_list.__len__() > 0:
+            update_sql = update_sql + where
+        db.commit(update_sql, update_data_list)
+    else:
+        db.commit(update_sql, update_date)
 
 # str1 = format_sql_params({'name': 'asd', 'age': 14, 'address': 'asd'}, 'and')
 # print(str1)
@@ -112,14 +115,14 @@ def update(db, data_base_data, web_data, update_sql='', where='', update_data_ha
 # sql_str = 'insert into test_table(name, age) value ("%s", %d)' % ("张二", 18) # 使用sql插入
 # sql_str = 'insert into test_table(name, age) value (%s, %s)' # 使用元组批量插入
 # sql_str = 'insert into test_table(name, age) value (%(name)s, %(age)s)'  # 使用字典插入
-# update_sql_str = 'update test_table set name=%(name)s where id=%(id)s'
+# update_sql_str = 'update test_table set name=%(name)s where id=1'
 #
 # from whbigdata.crawler.crawle_utils.crawler import configs
 #
 # connect = DBConnect(configs['data_base'])
 # with connect as db:
-#     data = db.query(sql_str)
-#     print(data)
+    # data = db.query(sql_str)
+    # print(data)
 # query_data = db.query(sql_str)
 # query_data = db.query(sql_str, [{'name': 'ddsa'}, {'name': 'haaaa'}])
 # print(query_data)
@@ -132,5 +135,5 @@ def update(db, data_base_data, web_data, update_sql='', where='', update_data_ha
 # count = db.commit(sql_str, [{'name': 'ahhhh', 'age': 20}, {'name': 'ddddd', 'age': 10}])  # 使用字典批量插入
 # print(count)
 # pass
-# count = db.commit(update_sql_str, [{'id': '2', 'name': 'ddsa'}, {'name': 'jkr', 'id': 1}])
-# print(count)
+#     count = db.commit(update_sql_str, {'name': 'allgii'})
+#     print(count)
