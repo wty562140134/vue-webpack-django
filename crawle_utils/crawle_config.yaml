@@ -19,6 +19,9 @@ task:
   get_org_task:
     when_time: 'day'
     at_day_start_time: '00:00:00'
+  monitor_task_get_count:
+    when_time: 'day'
+    at_day_start_time: '00:00:00'
   monitor_task_morning:
     when_time: 'day'
     at_day_start_time: '10:00:00'

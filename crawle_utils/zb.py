@@ -1,7 +1,6 @@
 # coding=utf-8
 from math import cos, sin, pow, tan, sqrt, asin, degrees
 
-
 def lengs(lengs, y):
     f = 0
     if lengs < 0:

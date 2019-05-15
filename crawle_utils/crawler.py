@@ -5,7 +5,13 @@ import hashlib
 import http.cookiejar
 import simplejson
 import os
-from .config_util import yaml_util
+
+try:
+    from .config_util import yaml_util
+except ModuleNotFoundError as e:
+    from config_util import yaml_util
+except ImportError as e:
+    from config_util import yaml_util
 
 # 获取本模块路径
 current_path = os.path.abspath(os.path.dirname(__file__))

@@ -97,12 +97,14 @@ def insert(db, insert_data, insert_sql='', insert_data_handle_fun=None):
     db.commit(insert_sql, insert_data)
 
 
-def update(db, update_date, data_base_data=None, web_data=None, update_sql='', where='', update_data_handle_fun=None):
+def update(db, update_date=None, data_base_data=None, web_data=None, update_sql='', where='',
+           update_data_handle_fun=None):
     if update_data_handle_fun is not None:
         update_sql, update_data_list = update_data_handle_fun(data_base_data, web_data, update_sql)
-        if update_data_list.__len__() > 0:
-            update_sql = update_sql + where
-        db.commit(update_sql, update_data_list)
+        if update_data_list is not None:
+            if update_data_list.__len__() > 0:
+                update_sql = update_sql + where
+                db.commit(update_sql, update_data_list)
     else:
         db.commit(update_sql, update_date)
 
@@ -121,8 +123,8 @@ def update(db, update_date, data_base_data=None, web_data=None, update_sql='', w
 #
 # connect = DBConnect(configs['data_base'])
 # with connect as db:
-    # data = db.query(sql_str)
-    # print(data)
+# data = db.query(sql_str)
+# print(data)
 # query_data = db.query(sql_str)
 # query_data = db.query(sql_str, [{'name': 'ddsa'}, {'name': 'haaaa'}])
 # print(query_data)
