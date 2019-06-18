@@ -150,6 +150,17 @@ api_url:
   #'floorId': '530102YZDW201811290002_001_U006',
   # 'buildId': '530102YZDW201811290002_001',
   #}
+  queryAlarmAccidentCountInfoWL: 'api/v1/fire-society/group/index/{}' # 消防管家火警接口
+  # 消防管家火警接口参数
+  #{
+  # 'unitId':'530102YZDW201901080001'
+  #}
+  getMonitorListInfo: 'api/v1/monitorCenter/wl/monitor/{}?{}' # 消防管家单位火警,电器火灾预警消防设施故障,监测设备异常,接口
+  # 消防管家单位火警,电器火灾预警消防设施故障,监测设备异常参数
+  #{
+  # 'unitId': '530102YZDW201901080001',
+  # 'runState': 1(1:火警, 2:消防设施故障,5:监测设备异常,98:电器火灾预警)
+  #}
 
 
 # 获取消防管家地图 实时报警 监测故障 当前隐患信息接口
@@ -185,11 +196,13 @@ post_interface_url:
   ##################################################################
   - 'queryLyMonitorInfo' # 消防管家企业,实时报警,实时故障
   - 'getDeviceListByCondition' # 告警探头信息#{'unitId': '530102YZDW201811290002', 'floorId': '530102YZDW201811290002_001_U006', 'buildId': '530102YZDW201811290002_001', 'deviceTypeIds': '', 'runState': ''}
+  - 'queryAlarmAccidentCountInfoWL' # 消防管家新增火警接口{'unitId': '530102YZDW201901080001'}
 
 # 获取消防管家地图数据和消防管家实时报警,检测故障,当前隐患数接口
 get_interface_url:
   - 'getChildOrg'  # 地图数据,包各单位的orgCode
   - 'getInfoNum'  # 实时报警,检测故障,当前隐患数
+  - 'getMonitorListInfo' # 消防管家单位火警,电器火灾预警消防设施故障,监测设备异常,接口
 
 # 消防管家运行监测-监测报表
 monitor_report:
