@@ -231,8 +231,8 @@ monitor_report:
 
 # 登录运营中心账号密码
 login_data:
-  loginName: 'km01'
-  password: 'a123456'
+  loginName: ''
+  password: ''
   systemCode: ''
 # 登录运营中心加密的盐
 salt: 'true'
@@ -244,10 +244,10 @@ map_serch_data:
 
 
 whxfdd_org_code:
-  orgCode: 'WHXFDD_JT_201910110'
+  orgCode: ''
 
 # 消防管家加载用户信息请求data
 req_user_info_data:
-  loginName: 'whxfdd'
+  loginName: ''
 
 
