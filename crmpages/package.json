@@ -15,7 +15,7 @@
     "build-all": "node build/build-all.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "element-ui": "^2.6.1",
     "md5": "^2.2.1",
     "popper.js": "^1.14.7",
